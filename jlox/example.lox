@@ -1,2 +1,30 @@
-var abc = 123;
-var xyz = "Hello world!";
+print "one";
+print true;
+print 2 + 1;
+
+var beverage = "espresso";
+print beverage; // "espresso".
+
+var a;
+print a; // "nil".
+
+var one = 1;
+var two = 2;
+var three = 1 + 2;
+print one + 2;
+print three;
+
+var a = "a";
+print a;
+a = "A";
+print a;
+
+{
+  var a = "first";
+  print a; // "first".
+}
+
+{
+  var a = "second";
+  print a; // "second".
+}
