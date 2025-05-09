@@ -35,6 +35,10 @@ public class Lox {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader reader = new BufferedReader(input);
 
+        System.out.println("jLox v0.0.1 REPL");
+        System.out.println("Ctrl+C to quit");
+        System.out.println("");
+
         for (;;) {
             System.out.print("> ");
             String line = reader.readLine();
