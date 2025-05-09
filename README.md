@@ -10,7 +10,11 @@ mvn archetype:generate -DgroupId=net.querc.jlox -DartifactId=jlox -DarchetypeArt
 
 ```sh
 cd jlox
-mvn package && ./run.sh
+mvn package
+# REPL:
+./jlox
+# Script file:
+./jlox example.lox
 ```
 
 ## Debug
