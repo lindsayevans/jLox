@@ -17,6 +17,12 @@ mvn package
 ./jlox example.lox
 ```
 
+### Generate AST
+
+```sh
+./generate_ast ./src/main/java/net/querc/jlox
+```
+
 ## Debug
 
 TODO
