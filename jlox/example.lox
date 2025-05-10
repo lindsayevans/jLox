@@ -28,3 +28,7 @@ print a;
   var a = "second";
   print a; // "second".
 }
+
+print "hi" or 2; // "hi".
+print nil or "yes"; // "yes".
+
