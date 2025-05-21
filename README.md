@@ -26,3 +26,11 @@ mvn package
 ## Debug
 
 TODO
+
+# clox
+
+```
+cd clox
+make
+./bin/clox
+```
