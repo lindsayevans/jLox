@@ -40,6 +40,11 @@ class LoxClass implements LoxCallable {
         return initializer.arity();
     }
 
+    @Override
+    public boolean variadic() {
+        return false;
+    }
+
     LoxFunction findMethod(String name) {
         if (methods.containsKey(name)) {
             return methods.get(name);

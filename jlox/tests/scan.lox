@@ -1,0 +1,3 @@
+print "What's your name?";
+var name = scan();
+printf("Hello %s!%n", name);

@@ -1,0 +1,5 @@
+printf("Hi!%n");
+var msg = "World";
+printf("Hello %s! %n", msg);
+var msg2 = "dude";
+printf("Hello %s! %s %n", msg, msg2);

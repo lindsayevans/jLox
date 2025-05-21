@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 class Interpreter implements Expr.Visitor<Object>,
         Stmt.Visitor<Void> {
@@ -19,9 +20,70 @@ class Interpreter implements Expr.Visitor<Object>,
             }
 
             @Override
+            public boolean variadic() {
+                return false;
+            }
+
+            @Override
             public Object call(Interpreter interpreter,
                     List<Object> arguments) {
                 return (double) System.currentTimeMillis() / 1000.0;
+            }
+
+            @Override
+            public String toString() {
+                return "<native fn>";
+            }
+        });
+
+        globals.define("scan", new LoxCallable() {
+            @Override
+            public int arity() {
+                return 0;
+            }
+
+            @Override
+            public boolean variadic() {
+                return false;
+            }
+
+            @Override
+            public Object call(Interpreter interpreter,
+                    List<Object> arguments) {
+
+                Scanner scan = new Scanner(System.in);
+                String s = scan.next();
+                scan.close();
+
+                return s;
+            }
+
+            @Override
+            public String toString() {
+                return "<native fn>";
+            }
+        });
+
+        globals.define("printf", new LoxCallable() {
+            @Override
+            public int arity() {
+                return 1;
+            }
+
+            @Override
+            public boolean variadic() {
+                return true;
+            }
+
+            @Override
+            public Object call(Interpreter interpreter,
+                    List<Object> arguments) {
+
+                String format = (String) arguments.get(0);
+                arguments.remove(0);
+
+                System.out.printf(format, arguments.toArray());
+                return null;
             }
 
             @Override
@@ -302,7 +364,11 @@ class Interpreter implements Expr.Visitor<Object>,
 
         LoxCallable function = (LoxCallable) callee;
 
-        if (arguments.size() != function.arity()) {
+        if (function.variadic() && arguments.size() < function.arity()) {
+            throw new RuntimeError(expr.paren, "Expected " +
+                    function.arity() + " arguments but got " +
+                    arguments.size() + ".");
+        } else if (!function.variadic() && arguments.size() != function.arity()) {
             throw new RuntimeError(expr.paren, "Expected " +
                     function.arity() + " arguments but got " +
                     arguments.size() + ".");
