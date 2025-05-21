@@ -394,8 +394,14 @@ class Parser {
         if (match(NIL))
             return new Expr.Literal(null);
 
-        if (match(NUMBER, STRING)) {
+        // if (match(NUMBER, STRING)) {
+        // return new Expr.Literal(previous().literal);
+        // }
+        if (match(NUMBER)) {
             return new Expr.Literal(previous().literal);
+        }
+        if (match(STRING)) {
+            return new Expr.Literal(unescapeString((String) previous().literal));
         }
 
         if (match(SUPER)) {
@@ -491,6 +497,13 @@ class Parser {
 
             advance();
         }
+    }
+
+    private String unescapeString(String string) {
+        // TODO: handle escaped \
+        return string
+                .replace("\\n", "\n")
+                .replace("\\t", "\t");
     }
 
 }

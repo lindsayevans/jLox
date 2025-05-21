@@ -1,0 +1,5 @@
+print "hi";
+print "hi!\nhi!";
+print "hola!\thi!";
+// Not implemented yet:
+// print "hola!\\n\\thi!";
