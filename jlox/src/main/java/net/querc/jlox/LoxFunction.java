@@ -43,6 +43,11 @@ class LoxFunction implements LoxCallable {
     }
 
     @Override
+    public boolean variadic() {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return "<fn " + declaration.name.lexeme + ">";
     }
