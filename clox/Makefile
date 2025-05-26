@@ -1,29 +1,27 @@
 CC = clang
-GCC_FLAGS = -Wall
+GCC_FLAGS = -Wall -Wextra -Wno-unused-parameter -Wdouble-promotion -Wconversion -Wno-sign-conversion -fsanitize=address,undefined
 LDFLAGS = 
 SRC_DIR = src
 BUILD_DIR = bin
 EXE = $(BUILD_DIR)/clox
 
 SRCS = $(shell find $(SRC_DIR) -name '*.c')
+HDRS = $(shell find $(SRC_DIR) -name '*.h')
 OBJS = $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:.c=.o))
 
 all: GCC_FLAGS += -O3
-all: $(OBJS) $(EXE)
+all: $(BUILD_DIR) $(OBJS) $(EXE)
 
-debug: GCC_FLAGS += -DDEBUG -g -O1
+debug: GCC_FLAGS += -DDEBUG -g3 -O1
 debug: $(EXE)
 
-$(EXE): $(OBJS) | $(BUILD_DIR)
+$(EXE): $(OBJS)
 	$(CC) $(GCC_FLAGS) -o $(EXE) $(LDFLAGS) $(OBJS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c $(HDRS)
 	$(CC) $(GCC_FLAGS) -c -o $@ $<
 
 $(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
-$(BUILD_DIR)/util:
 	mkdir -p $(BUILD_DIR)
 
 clean:
