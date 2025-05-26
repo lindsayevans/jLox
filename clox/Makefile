@@ -12,7 +12,7 @@ OBJS = $(subst $(SRC_DIR), $(BUILD_DIR), $(SRCS:.c=.o))
 all: GCC_FLAGS += -O3
 all: $(BUILD_DIR) $(OBJS) $(EXE)
 
-debug: GCC_FLAGS += -DDEBUG -g3 -O1
+debug: GCC_FLAGS += -DDEBUG -DDEBUG_PRINT_CODE -DDEBUG_TRACE_EXECUTION -g3 -O1
 debug: $(EXE)
 
 $(EXE): $(OBJS)
